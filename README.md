@@ -9,7 +9,7 @@
 
 ## About
 
-This is a comprehensive food delivery app featuring secure user authentication with JWT, seamless registration via OAuth, and personalized user profiles.
+This is a comprehensive food delivery app created using Node/Express, TypeScript, and MongoDB for the backend, featuring secure user authentication with JWT, seamless registration via OAuth, and personalized user profiles.
 
 ## Demo
 
