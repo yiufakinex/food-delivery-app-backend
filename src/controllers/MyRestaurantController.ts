@@ -121,7 +121,7 @@ const updateOrderStatus = async (req: Request, res: Response) => {
 
   const uploadImage = async (file: Express.Multer.File) => {
     const image = file;
-    const base64Image = Buffer.from(image.buffer).toString("base64");
+    const base64Image = image.buffer.toString("base64");
     const dataURI = `data:${image.mimetype};base64,${base64Image}`;
   
     const uploadResponse = await cloudinary.v2.uploader.upload(dataURI);
