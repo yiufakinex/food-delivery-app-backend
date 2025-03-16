@@ -36,25 +36,42 @@ type CheckoutSessionRequest = {
   };
 
 const stripeWebhookHandler = async (req: Request, res: Response) => {
-
     let event;
 
+    console.log("💰 Webhook endpoint hit");
+
     try {
-        const sig = req.headers["stripe-signature"];
-        event = STRIPE.webhooks.constructEvent(
-          req.body,
-          sig as string,
-          STRIPE_ENDPOINT_SECRET
-        );
-      } catch (error: any) {
-        console.log(error);
-        return res.status(400).send(`Webhook error: ${error.message}`);
+      
+      const sig = req.headers["stripe-signature"];
+      
+      if (!sig) {
+        console.error("No Stripe signature found");
+        return res.status(400).send("Missing stripe-signature header");
       }
+      
+      console.log("Signature received:", sig);
+      
+   
+      event = STRIPE.webhooks.constructEvent(
+        req.body, 
+        sig as string,
+        STRIPE_ENDPOINT_SECRET
+      );
+      
+      console.log("🔍 Webhook signature verified, event type:", event.type);
+      
+    } catch (error: any) {
+      console.log(`⚠️ Webhook signature verification failed: ${error.message}`);
+      return res.status(400).send(`Webhook error: ${error.message}`);
+    }
     
-      if (event.type === "checkout.session.completed") {
+ 
+    if (event.type === "checkout.session.completed") {
+      try {
         const order = await Order.findById(event.data.object.metadata?.orderId);
     
         if (!order) {
+          console.error("Order not found:", event.data.object.metadata?.orderId);
           return res.status(404).json({ message: "Order not found" });
         }
     
@@ -62,13 +79,15 @@ const stripeWebhookHandler = async (req: Request, res: Response) => {
         order.status = "paid";
     
         await order.save();
+        console.log(`✅ Order ${order._id} updated to paid status`);
+      } catch (error: any) {
+        console.error("Error updating order:", error);
+       
       }
+    }
     
-      res.status(200).send();
+    res.status(200).json({ received: true });
 };
-    
-
-
 
 const createCheckoutSession = async (req: Request, res: Response) => {
   try {
@@ -88,6 +107,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
         status: "placed",
         deliveryDetails: checkoutSessionRequest.deliveryDetails,
         cartItems: checkoutSessionRequest.cartItems,
+        totalAmount: 0,
         createdAt: new Date(),
       });
 
@@ -112,7 +132,9 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       res.json({ url: session.url });
   } catch (error: any) {
     console.log(error);
-    res.status(500).json({ message: error.raw.message });
+    res.status(500).json({ 
+      message: error.raw?.message || error.message || "Error creating checkout session" 
+    });
   }
 };
 
