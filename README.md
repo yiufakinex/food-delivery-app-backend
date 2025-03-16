@@ -4,15 +4,39 @@
 
 <ol>
   <li><a href="#about">About</a></li>
+  <li><a href="#features">Features</a></li>
+  <li><a href="#deployment">Deployment</a></li>
   <li><a href="#demo">Demo</a></li>
 </ol>
 
 ## About
 
-This is a comprehensive food delivery app created using Node/Express, TypeScript, and MongoDB for the backend, featuring secure user authentication with JWT, seamless registration via OAuth, and personalized user profiles. The app includes robust search, sorting, filtering, and pagination to enhance user experience in discovering restaurants and cuisines. Restaurant management is streamlined with tools for listing, menu updates, and image uploads. Users can efficiently manage their carts and process payments through Stripe, with real-time order status updates.
+This is a food delivery application created using Node.js/TypeScript and Express in the backend.
+
+## Features
+
+- RESTful API architecture
+- Auth0 integration
+- Restaurant management system
+- Order processing
+- Stripe payment integration
+- Webhook handling
+- Image storage with Cloudinary
+- Security measures:
+  - CORS configuration
+  - Auth0 JWT validation
+  - Secure webhook handling
+  - Data validation
+
+## Deployment
+
+- AWS EC2 for hosting
+- MongoDB Atlas for database
+- DuckDNS for domain management
+- Nginx as reverse proxy
+- HTTPS/SSL support with Let's Encrypt
+- Secure Stripe webhook integration
 
 ## Demo
 
-![image](https://github.com/yiufakinex/food-delivery-app-backend)
-
-<br>
+API Endpoint: https://fooddeli.duckdns.org/api
