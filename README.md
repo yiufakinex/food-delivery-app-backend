@@ -39,4 +39,10 @@ This is a food delivery application created using Node.js/TypeScript and Express
 
 ## Demo
 
+<<<<<<< HEAD
 API Endpoint: https://fooddeli.duckdns.org/api
+=======
+![Food Delivery App Demo](https://res.cloudinary.com/dls9pinnl/image/upload/t_chatappresize/v1716250047/desertgo_vljrlt.jpg)
+
+[Live Demo](https://fooddeli.duckdns.org)
+>>>>>>> main
