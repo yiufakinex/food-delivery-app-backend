@@ -33,16 +33,11 @@ This is a food delivery application created using Node.js/TypeScript and Express
 - AWS EC2 for hosting
 - MongoDB Atlas for database
 - DuckDNS for domain management
-- Nginx as reverse proxy
+- Nginx as a reverse proxy
 - HTTPS/SSL support with Let's Encrypt
 - Secure Stripe webhook integration
 
 ## Demo
-
-<<<<<<< HEAD
-API Endpoint: https://fooddeli.duckdns.org/api
-=======
 ![Food Delivery App Demo](https://res.cloudinary.com/dls9pinnl/image/upload/t_chatappresize/v1716250047/desertgo_vljrlt.jpg)
 
 [Live Demo](https://fooddeli.duckdns.org)
->>>>>>> main
